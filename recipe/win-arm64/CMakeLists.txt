@@ -15,6 +15,9 @@ if(NOT XDMCP_VERSION)
   message(FATAL_ERROR "XDMCP_VERSION must contain the packaged libXdmcp version")
 endif()
 
+# cmd.exe supplies backslashes; generated install scripts need CMake paths.
+file(TO_CMAKE_PATH "${XDMCP_SOURCE_DIR}" XDMCP_SOURCE_DIR)
+
 find_path(XORGPROTO_INCLUDE_DIR NAMES X11/Xmd.h REQUIRED)
 
 add_library(Xdmcp SHARED
