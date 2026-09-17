@@ -29,7 +29,7 @@ requirements:
     - autotools_clang_conda >=0.0.14  # [win and arm64]
     - pkg-config                    # [win and arm64]
     - pkg-config                    # [unix]
-    - m2-pkg-config                 # [win and x86_64]
+    - m2-pkg-config                 # [win]
     - gnuconfig                     # [unix]
     - m2-base                       # [win and x86_64]
     - make                          # [unix]

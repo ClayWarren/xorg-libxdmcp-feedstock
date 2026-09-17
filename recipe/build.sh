@@ -25,7 +25,7 @@ fi
 
 # On Windows we need to regenerate the configure scripts.
 if [[ "${target_platform:-}" == "win-arm64" ]]; then
-    autoreconf -vfi -I "$PREFIX/share/aclocal"
+    autoreconf -vfi -I "$PREFIX/share/aclocal" -I "$BUILD_PREFIX/Library/usr/share/aclocal"
 elif [ -n "$CYGWIN_PREFIX" ] ; then
     am_version=1.16 # keep sync'ed with meta.yaml
     export ACLOCAL=aclocal-$am_version
