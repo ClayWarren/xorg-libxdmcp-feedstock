@@ -25,6 +25,8 @@ fi
 
 # On Windows we need to regenerate the configure scripts.
 if [[ "${target_platform:-}" == "win-arm64" ]]; then
+    # X11 headers use WIN32, while MSVC-target Clang defines only _WIN32.
+    export CPPFLAGS="$CPPFLAGS -DWIN32"
     autoreconf -vfi -I "$PREFIX/share/aclocal" -I "$BUILD_PREFIX/Library/usr/share/aclocal"
 elif [ -n "$CYGWIN_PREFIX" ] ; then
     am_version=1.16 # keep sync'ed with meta.yaml
