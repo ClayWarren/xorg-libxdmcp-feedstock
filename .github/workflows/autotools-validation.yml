@@ -1,0 +1,37 @@
+name: Validate libXdmcp Autotools on Windows
+on:
+  push:
+    branches: [codex/xdmcp19-autotools-validation]
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - config: win_arm64_
+            platform: win-arm64
+            runner: windows-11-arm
+          - config: win_64_
+            platform: win-64
+            runner: windows-2022
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    env:
+      CI: github_actions
+      CONFIG: ${{ matrix.config }}
+      BUILD_PLATFORM: ${{ matrix.platform }}
+      HOST_PLATFORM: ${{ matrix.platform }}
+      MINIFORGE_HOME: C:\Miniforge
+      CONDA_BLD_PATH: C:\bld
+      UPLOAD_PACKAGES: 'False'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and test
+        shell: cmd
+        run: |
+          set "flow_run_id=github_%GITHUB_RUN_ID%"
+          set "remote_url=https://github.com/%GITHUB_REPOSITORY%"
+          set "sha=%GITHUB_SHA%"
+          call .scripts\run_win_build.bat
