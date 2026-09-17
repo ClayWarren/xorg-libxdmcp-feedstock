@@ -13,9 +13,6 @@ jobs:
           - config: win_arm64_
             platform: win-arm64
             runner: windows-11-arm
-          - config: win_64_
-            platform: win-64
-            runner: windows-2022
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 90
     env:
